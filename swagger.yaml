@@ -1,0 +1,897 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/seng2021-6d3/SENG2021_ios/1.0.0
+info:
+  description: This is a despatch advice API
+  version: "1.0.0"
+  title: Despatch Advice API
+paths:
+  /api/v1/despatchAdvice/:
+    post:
+      summary: Create a despatch advice
+      description: |
+        Accepts an order advice document and shipment details in JSON format, then returns a despatch advice in UBL (XML) format.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - orderAdvice
+                - shipment
+              properties:
+                orderAdvice:
+                  type: object
+                  description: Order advice document in JSON format
+                  properties:
+                    field_xmlns:
+                      type: string
+                    field_xmlns_cac:
+                      type: string
+                    cbc_UBLVersionID:
+                      type: string
+                    cbc_ProfileID:
+                      type: string
+                    cbc_ID:
+                      type: string
+                    cbc_UUID:
+                      type: string
+                      format: uuid
+                    cbc_IssueDate:
+                      type: string
+                      format: date
+                    cac_OrderLine:
+                      type: object
+                      properties:
+                        cbc_Note:
+                          type: string
+                        cac_LineItem:
+                          type: object
+                          properties:
+                            cbc_ID:
+                              type: string
+                            cbc_SalesOrderID:
+                              type: string
+                            cbc_LineStatusCode:
+                              type: string
+                            cbc_Quantity:
+                              type: object
+                              properties:
+                                field_unitCode:
+                                  type: string
+                                text:
+                                  type: string
+                            cac_Item:
+                              type: object
+                              properties:
+                                cbc_Name:
+                                  type: string
+                                cbc_Description:
+                                  type: string
+                    cac_BuyerCustomerParty:
+                      type: object
+                      properties:
+                        cbc_CustomerAssignedAccountID:
+                          type: string
+                        cbc_SupplierAssignedAccountID:
+                          type: string
+                        cac_Party:
+                          type: object
+                          properties:
+                            cac_PartyName:
+                              type: object
+                              properties:
+                                cbc_Name:
+                                  type: string
+                            cac_PostalAddress:
+                              type: object
+                              properties:
+                                cbc_StreetName:
+                                  type: string
+                                cbc_BuildingName:
+                                  type: string
+                                cbc_BuildingNumber:
+                                  type: string
+                                cbc_CityName:
+                                  type: string
+                                cbc_PostalZone:
+                                  type: string
+                                cbc_CountrySubentity:
+                                  type: string
+                                cac_AddressLine:
+                                  type: object
+                                  properties:
+                                    cbc_Line:
+                                      type: string
+                                cac_Country:
+                                  type: object
+                                  properties:
+                                    cbc_IdentificationCode:
+                                      type: string
+                            cac_PastryTaxScheme:
+                              type: object
+                              properties:
+                                cbc_RegistrationName:
+                                  type: string
+                                cbc_CompanyID:
+                                  type: string
+                                cbc_ExemptionReason:
+                                  type: string
+                                cac_TaxScheme:
+                                  type: object
+                                  properties:
+                                    cbc_ID:
+                                      type: string
+                                    cbc_TaxTypeCode:
+                                      type: string
+                            cac_Contact:
+                              type: object
+                              properties:
+                                cbc_Name:
+                                  type: string
+                                cbc_Telephone:
+                                  type: string
+                                cbc_Telefax:
+                                  type: string
+                                cbc_ElectronicMail:
+                                  type: string
+                shipment:
+                  type: object
+                  description: Shipment details in JSON format
+                  properties:
+                    cbc_ID:
+                      type: string
+                    cac_Consignment:
+                      type: object
+                      properties:
+                        cbc_ID:
+                          type: string
+                        cbc_CarrierServiceInstructions:
+                          type: string
+                    cac_Delivery:
+                      type: object
+                      properties:
+                        cbc_ActualDeliveryDate:
+                          type: string
+                          format: date
+                        cac_DeliveryAddress:
+                          type: object
+                          properties:
+                            cbc_StreetName:
+                              type: string
+                            cbc_BuildingNumber:
+                              type: string
+                            cbc_CityName:
+                              type: string
+                            cbc_PostalZone:
+                              type: string
+                            cbc_CountrySubentity:
+                              type: string
+                            cac_Country:
+                              type: object
+                              properties:
+                                cbc_IdentificationCode:
+                                  type: string
+                        cac_RequestedDeliveryPeriod:
+                          type: object
+                          properties:
+                            cbc_StartDate:
+                              type: string
+                              format: date
+                            cbc_EndDate:
+                              type: string
+                              format: date
+      responses:
+        '200':
+          description: Created a despatch advice from an order advice 
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Despatch Advice in UBL format (XML)
+                example: 
+                  statusCode: "200"
+        '400':
+          description: Bad Request - Order advice is not in the correct format and or shipment details are not in the correct format. 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example:
+                      {
+                        "statusCode": 404,
+                        "message": "Bad Request: Inputs are not in the correct format"
+                      }
+                    
+    get:
+      summary: Get list of despatch advice documents
+      description: Retrieves a list of all despatch advice document reference numbers
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  despatchAdvices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        despatchAdviceID:
+                          type: string
+                          example:
+                            statusCode: "200"
+                            Items: "items_xml"
+        '204':
+          description: No Content - No despatch advice documents
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example:
+                      {
+                        "statusCode": 204,
+                        "message": "No despatch advice found"
+                      }
+          
+  /api/v1/despatchAdvice/search/:
+    get:
+      summary: Retrieve despatch advice documents within a date range
+      description: |
+          Retrieves a list of despatch advice documents whose delivery date is between the given range.
+      parameters:
+        - name: startdate
+          in: query
+          required: true
+          description: The start date for filtering despatch advice documents (YYYY/MM/DD)
+          schema:
+            type: string
+            format: date
+        - name: enddate
+          in: query
+          required: true
+          description: The end date for filtering despatch advice documents (YYYY/MM/DD)
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: List of Despatch Advice documents within the given date range.
+          content:
+            application/xml:
+              schema:
+                type: string
+                description: List of Despatch Advice documents in XML format, including issue date and expected delivery date.
+        '204':
+          description: No Content - No despatch advice documents found within the given date range.
+        '400':
+          description: Bad Request - Invalid date format or missing required parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          description: Unauthorized - User is not authorized to access this data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /api/v1/despatchAdvice/search/shipped:
+    get:
+      summary: Retrieve all despatch advice orders that has a delivery address to a particular  country
+      description: |
+          Retrieves a list of despatch advice documents that are being delivered to the specified country.
+      parameters: 
+        - name: country
+          in: query
+          required: true
+          description: The name of the country
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of Despatch Advice documents for the specified country.
+          content:
+            application/json:
+              schema:
+                type: string
+                description: List of Despatch Advice documents in XML format with the same country.
+                example: 
+                  statusCode: "200"
+                  despatchAdvices with same ShipmentCountry: {
+                    despatchAdvicesIDs: 
+                    [
+                      "ID: 9471",
+                      "ID: 2644"
+                    ]
+                  }
+        '204':
+          description: No Content - No despatch advice documents found for the specified country.
+        '400':
+          description: Bad Request - The country name does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 
+                      statusCode: "400"
+                      message: "Bad Request - Country is not provided"
+        '404':
+          description: No content - The country is invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example:
+                      statusCode: "401"
+                      message: "No content - The country is invalid"
+                      
+  /api/v1/despatchAdvice/search/location:
+    get:
+      summary: Retrieve despatch advice documents for a specific postal zone and city
+      description: |
+          Retrieve all despatch orders that have the same delivery postal zone and city name
+      parameters: 
+        - name: zone
+          in: query
+          required: true
+          description: The postal zone where the despatch advice is being shipped
+          schema:
+            type: string
+        - name: city
+          in: query
+          required: true
+          description: The name of the city where the despatch advice is being shipped
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Despatch orders for the specified postal zone and city.
+          content:
+            application/xml:
+              schema:
+                type: string
+                description: List of Despatch Advice documents in XML format with the same postal zone and city.
+        '204':
+          description: No Content - No despatch advice documents found for the specified postal zone and city.
+        '400':
+          description: Bad Request - The city name does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          description: Unauthorized - User is not authorized to access this data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /api/v1/despatchAdvice/{despatchId}/shipment:
+    get:
+      summary: Retrieve all shipment details from the despatch advice
+      description: |
+          Retrieves shipment details including consignment ID, delivery address, and requested delivery period for a given despatch advice ID.
+      parameters: 
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Shipment details for the specified despatch advice.
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Shipment details in XML format.
+                example: 
+                  statusCode: "200"
+                  items: "<ShipmentDetails>\n  <cbc:ID>1</cbc:ID>\n  <cac:Consignment>\n    <cbc:ID>1</cbc:ID>\n  </cac:Consignment>\n  <cac:Delivery>\n    <cac:DeliveryAddress>\n      <cbc:StreetName>Avon Way</cbc:StreetName>\n      <cbc:BuildingName>Thereabouts</cbc:BuildingName>\n      <cbc:BuildingNumber>56A</cbc:BuildingNumber>\n      <cbc:CityName>Bridgtow</cbc:CityName>\n      <cbc:PostalZone>ZZ99 1ZZ</cbc:PostalZone>\n      <cbc:CountrySubentity>Avon</cbc:CountrySubentity>\n      <cac:AddressLine>\n        <cbc:Line>3rd Floor, Room 5</cbc:Line>\n      </cac:AddressLine>\n      <cac:Country>\n        <cbc:IdentificationCode>GB</cbc:IdentificationCode>\n      </cac:Country>\n    </cac:DeliveryAddress>\n    <cac:RequestedDeliveryPeriod>\n      <cbc:StartDate>2005-06-20</cbc:StartDate>\n      <cbc:StartTime>10:30:47.0Z</cbc:StartTime>\n      <cbc:EndDate>2005-06-21</cbc:EndDate>\n      <cbc:EndTime>10:30:47.0Z</cbc:EndTime>\n    </cac:RequestedDeliveryPeriod>\n  </cac:Delivery>\n</ShipmentDetails>"
+        '400':
+          description: Bad Request - Invalid despatch ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 
+                      statusCode: "400"
+                      message: "Bad Request - The despatch ID is not provided"
+        '404':
+          description: No content - The despatch ID is invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 
+                      statusCode: "404"
+                      message: "No content - The despatch ID is invalid"          
+          
+                    
+    patch:
+      summary: update shipping details
+      description: |
+          Updates shipment details including shipment ID, consignment, requested delivery period, and delivery customer party for a given despatch advice ID.
+      parameters:
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - shipmentID
+                - consignment
+                - requestedDeliveryPeriod
+                - deliveryCustomerParty
+              properties:
+                shipmentID:
+                  type: string
+                  description: The shipment ID.
+                consignment:
+                  type: object
+                  properties:
+                    consignmentID:
+                      type: string
+                      description: The consignment ID.
+                requestedDeliveryPeriod:
+                  type: object
+                  properties:
+                    startDate:
+                      type: string
+                      format: date
+                      description: The start date of the delivery period.
+                    endDate:
+                      type: string
+                      format: date
+                      description: The end date of the delivery period.
+                deliveryCustomerParty:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the delivery customer.
+                    address:
+                      type: object
+                      properties:
+                        streetName:
+                          type: string
+                        cityName:
+                          type: string
+                        postalZone:
+                          type: string
+                        country:
+                          type: string
+      responses:
+        '200':
+          description: Shipment details updated successfully.
+          content:
+            application/xml:
+              schema:
+                type: string
+                description: updated shipping details in XML format.
+        '400':
+          description: Bad Request - Invalid despatch ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          description: Unauthorized - User is not authorized to update this information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/v1/despatchAdvice/{despatchId}/shipment-arrival:
+    get:
+      summary: Retrieve expected arrival date of an order
+      description: |
+           Retrieves the expected arrival date range for the shipment of a given despatch advice ID
+      parameters:
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected arrival date range for the specified despatch advice.
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Expected arrival date range in XML format.
+                example:
+                  statusCode: "200"
+                  requestedDelivery: "<RequestedDeliveryPeriod>\n  <cbc:StartDate>2005-06-20</cbc:StartDate>\n  <cbc:StartTime>10:30:47.0Z</cbc:StartTime>\n  <cbc:EndDate>2005-06-21</cbc:EndDate>\n  <cbc:EndTime>10:30:47.0Z</cbc:EndTime>\n</RequestedDeliveryPeriod>"
+        '400':
+          description: Bad Request - Invalid despatch ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 
+                      statusCode: "400"
+                      message: "Bad Request - The despatch ID is not provided"
+        '404':
+          description: No content - The despatch ID is invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 
+                      statusCode: "200"
+                      message: "No content - The despatch ID is invalid"
+                      
+  /api/v1/despatchAdvice/{despatchId}/items:
+    get:
+      summary: Retrieve a list of all items of a despatch advice
+      description: |
+          Retrieves a list of all items and their descriptions for the given despatch advice ID.
+      parameters:
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of all items and their descriptions for the specified despatch advice.
+          content:
+            application/json:
+              schema:
+                type: string
+                description: List of all items in XML format.
+                example: 
+                  statusCode: "200"
+                  Items: "<Item>\n  <cbc:Description>Beeswax</cbc:Description>\n  <cbc:Name>Acme Beeswax</cbc:Name>\n  <cac:BuyersItemIdentification>\n    <cbc:ID>6578489</cbc:ID>\n  </cac:BuyersItemIdentification>\n  <cac:SellersItemIdentification>\n    <cbc:ID>17589683</cbc:ID>\n  </cac:SellersItemIdentification>\n  <cac:ItemInstance>\n    <cac:LotIdentification>\n      <cbc:LotNumberID>5</cbc:LotNumberID>\n      <cbc:ExpiryDate>2035-03-16</cbc:ExpiryDate>\n    </cac:LotIdentification>\n  </cac:ItemInstance>\n</Item>"
+        '400':
+          description: Bad Request - Invalid despatch ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 
+                      statuscode: "400"
+                      message: "Bad Request - The despatch ID is not provided"
+              
+        '404':
+          description: DespatchID is invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example:
+                      statuscode: "404"
+                      message: "No content - The despatch ID is invalid"
+                    
+  /api/v1/despatchAdvice/{despatchId}/orderReference:
+    get:
+      summary: Retrieve the order reference number from the despatch advice
+      description: |
+          Retrieves the order reference details including ID, Sales Order ID, UUID, and Issue Date for a given despatch advice ID.
+      parameters:
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order reference details for the specified despatch advice.
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Order reference details in XML format.
+                example: 
+                  statusCode: "200"
+                  Items: "<OrderReference>\n  <cbc:ID>AEG012345</cbc:ID>\n  <cbc:SalesOrderID>A</cbc:SalesOrderID>\n  <cbc:UUID>6E09886B-DC6E-439F-82D1-7CCAC7F4E3B1</cbc:UUID>\n  <cbc:IssueDate>2005-06-20</cbc:IssueDate>\n</OrderReference>"
+        '400':
+          description: Bad Request - Invalid despatch ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example:
+                      statusCode: "400"
+                      body: "Bad Request - The despatch ID is not provided"
+  
+  /api/v1/despatchAdvice/{despatchId}/supplier-postal:
+    get:
+      summary: Retrieve supplier postal address for a specific despatch advice
+      description: |
+          Retrieves the supplier's postal address including street name, building name, city, postal zone, and country identification code for a given despatch advice ID.
+      parameters:
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Supplier postal address for the specified despatch advice.
+          content:
+            application/xml:
+              schema:
+                type: string
+                description: Supplier postal address in XML format.
+        '400':
+          description: Bad Request - The despatch ID is not provided.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          description: Unauthorized - User is not authorized to access this data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '404':
+          description: Not Found - The despatch ID is invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /api/v1/despatchAdvice/{despatchId}/supplier-details:
+    get:
+      summary: Retrieve supplier contact details for a specific despatch advice
+      description: |
+          Retrieves the supplier's contact details including name, telephone, telefax, and email for a given despatch advice ID.
+      parameters:
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Supplier contact details for the specified despatch advice.
+          content:
+            application/xml:
+              schema:
+                type: string
+                description: Supplier contact details in XML format.
+        '400':
+          description: Bad Request - The despatch ID is not provided.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          description: Unauthorized - User is not authorized to access this data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '404':
+          description: Not Found - The despatch ID is invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /api/v1/despatchAdvice/{despatchId}/customer-postal:
+    get:
+      summary: Retrieve customer postal address for a specific despatch advice
+      description: |
+          Retrieves the customer's postal address including street name, building name, city, postal zone, and country identification code for a given despatch advice ID.
+      parameters:
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer postal address for the specified despatch advice.
+          content:
+            application/xml:
+              schema:
+                type: string
+                description: Customer postal address in XML format.
+        '400':
+          description: Bad Request - The despatch ID is not provided.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          description: Unauthorized - User is not authorized to access this data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '404':
+          description: Not Found - The despatch ID is invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /api/v1/despatchAdvice/{despatchId}/customer-details:
+    get:
+      summary: Retrieve customer contact details for a specific despatch advice
+      description: |
+          Retrieves the customer's contact details including name, telephone, telefax, and email for a given despatch advice ID.
+      parameters:
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer contact details for the specified despatch advice.
+          content:
+            application/xml:
+              schema:
+                type: string
+                description: Customer contact details in XML format.
+        '400':
+          description: Bad Request - The despatch ID is not provided.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '401':
+          description: Unauthorized - User is not authorized to access this data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '404':
+          description: Not Found - The despatch ID is invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/v1/despatchAdvice/{despatchId}:
+    delete:
+      summary: Delete a specific despatch advice
+      description: |
+          Deletes the despatch advice corresponding to the given despatch ID.
+      parameters:
+        - name: despatchId
+          in: path
+          required: true
+          description: The despatch advice ID of the order to be deleted.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Despatch advice deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: string
+                description: success
+        '400':
+          description: Bad Request - The despatch ID is not provided.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example:
+                      statusCode: 404
+                      message: "No content - The despatch ID is invalid"
+                      
+        '404':
+          description: Not Found - The despatch ID is invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
