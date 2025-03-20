@@ -1,0 +1,166 @@
+{
+    "DespatchAdvice": {
+      "@xmlns:cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+      "@xmlns:cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+      "@xmlns": "urn:oasis:names:specification:ubl:schema:xsd:DespatchAdvice-2",
+      "cbc:UBLVersionID": "2.0",
+      "cbc:CustomizationID": "urn:oasis:names:specification:ubl:xpath:DespatchAdvice-2.0:sbs-1.0-draft",
+      "cbc:ProfileID": "bpid:urn:oasis:names:draft:bpss:ubl-2-sbs-despatch-advice-notification-draft",
+      "cbc:ID": "565899",
+      "cbc:CopyIndicator": "false",
+      "cbc:UUID": "88C7280E-8F10-419F-9949-8EFFFA2842B8",
+      "cbc:IssueDate": "2005-06-20",
+      "cbc:DocumentStatusCode": "NoStatus",
+      "cbc:DespatchAdviceTypeCode": "delivery",
+      "cbc:Note": "sample",
+      "cac:OrderReference": {
+        "cbc:ID": "AEG012345",
+        "cbc:SalesOrderID": "CON0095678",
+        "cbc:UUID": "6E09886B-DC6E-439F-82D1-7CCAC7F4E3B1",
+        "cbc:IssueDate": "2005-06-20"
+      },
+      "cac:DespatchSupplierParty": {
+        "cbc:CustomerAssignedAccountID": "CO001",
+        "cac:Party": {
+          "cac:PartyName": {
+            "cbc:Name": "Consortial"
+          },
+          "cac:PostalAddress": {
+            "cbc:StreetName": "Busy Street",
+            "cbc:BuildingName": "Thereabouts",
+            "cbc:BuildingNumber": "56A",
+            "cbc:CityName": "Farthing",
+            "cbc:PostalZone": "AA99 1BB",
+            "cbc:CountrySubentity": "Heremouthshire",
+            "cac:AddressLine": {
+              "cbc:Line": "The Roundabout"
+            },
+            "cac:Country": {
+              "cbc:IdentificationCode": "GB"
+            }
+          },
+          "cac:PartyTaxScheme": {
+            "cbc:RegistrationName": "Farthing Purchasing Consortium",
+            "cbc:CompanyID": "175 269 2355",
+            "cbc:ExemptionReason": "N/A",
+            "cac:TaxScheme": {
+              "cbc:ID": "VAT",
+              "cbc:TaxTypeCode": "VAT"
+            }
+          },
+          "cac:Contact": {
+            "cbc:Name": "Mrs Bouquet",
+            "cbc:Telephone": "0158 1233714",
+            "cbc:Telefax": "0158 1233856",
+            "cbc:ElectronicMail": "bouquet@fpconsortial.co.uk"
+          }
+        }
+      },
+      "cac:DeliveryCustomerParty": {
+        "cbc:CustomerAssignedAccountID": "XFB01",
+        "cbc:SupplierAssignedAccountID": "GT00978567",
+        "cac:Party": {
+          "cac:PartyName": {
+            "cbc:Name": "IYT Corporation"
+          },
+          "cac:PostalAddress": {
+            "cbc:StreetName": "Avon Way",
+            "cbc:BuildingName": "Thereabouts",
+            "cbc:BuildingNumber": "56A",
+            "cbc:CityName": "Bridgtow",
+            "cbc:PostalZone": "ZZ99 1ZZ",
+            "cbc:CountrySubentity": "Avon",
+            "cac:AddressLine": {
+              "cbc:Line": "3rd Floor, Room 5"
+            },
+            "cac:Country": {
+              "cbc:IdentificationCode": "GB"
+            }
+          },
+          "cac:PartyTaxScheme": {
+            "cbc:RegistrationName": "Bridgtow District Council",
+            "cbc:CompanyID": "12356478",
+            "cbc:ExemptionReason": "Local Authority",
+            "cac:TaxScheme": {
+              "cbc:ID": "UK VAT",
+              "cbc:TaxTypeCode": "VAT"
+            }
+          },
+          "cac:Contact": {
+            "cbc:Name": "Mr Fred Churchill",
+            "cbc:Telephone": "0127 2653214",
+            "cbc:Telefax": "0127 2653215",
+            "cbc:ElectronicMail": "fred@iytcorporation.gov.uk"
+          }
+        }
+      },
+      "cac:Shipment": {
+        "cbc:ID": "1",
+        "cac:Consignment": {
+          "cbc:ID": "1"
+        },
+        "cac:Delivery": {
+          "cac:DeliveryAddress": {
+            "cbc:StreetName": "Avon Way",
+            "cbc:BuildingName": "Thereabouts",
+            "cbc:BuildingNumber": "56A",
+            "cbc:CityName": "Bridgtow",
+            "cbc:PostalZone": "ZZ99 1ZZ",
+            "cbc:CountrySubentity": "Avon",
+            "cac:AddressLine": {
+              "cbc:Line": "3rd Floor, Room 5"
+            },
+            "cac:Country": {
+              "cbc:IdentificationCode": "GB"
+            }
+          },
+          "cac:RequestedDeliveryPeriod": {
+            "cbc:StartDate": "2005-06-20",
+            "cbc:StartTime": "10:30:47.0Z",
+            "cbc:EndDate": "2005-06-21",
+            "cbc:EndTime": "10:30:47.0Z"
+          }
+        }
+      },
+      "cac:DespatchLine": {
+        "cbc:ID": "1",
+        "cbc:Note": "Mrs Green agreed to waive charge",
+        "cbc:LineStatusCode": "NoStatus",
+        "cbc:DeliveredQuantity": {
+          "@unitCode": "KGM",
+          "#text": "90"
+        },
+        "cbc:BackorderQuantity": {
+          "@unitCode": "KGM",
+          "#text": "10"
+        },
+        "cbc:BackorderReason": "lack of stock as explained on telephone today",
+        "cac:OrderLineReference": {
+          "cbc:LineID": "1",
+          "cbc:SalesOrderLineID": "A",
+          "cac:OrderReference": {
+            "cbc:ID": "AEG012345",
+            "cbc:SalesOrderID": "CON0095678",
+            "cbc:UUID": "6E09886B-DC6E-439F-82D1-7CCAC7F4E3B1",
+            "cbc:IssueDate": "2005-06-20"
+          }
+        },
+        "cac:Item": {
+          "cbc:Description": "Acme beeswax",
+          "cbc:Name": "beeswax",
+          "cac:BuyersItemIdentification": {
+            "cbc:ID": "6578489"
+          },
+          "cac:SellersItemIdentification": {
+            "cbc:ID": "17589683"
+          },
+          "cac:ItemInstance": {
+            "cac:LotIdentification": {
+              "cbc:LotNumberID": "546378239",
+              "cbc:ExpiryDate": "2010-01-01"
+            }
+          }
+        }
+      }
+    }
+  }
